@@ -18,10 +18,13 @@ function App() {
     api.get('/projects').then((response) => {
       setProjects(response.data);
     });
-  }, []);
+  }, [projects]);
 
-  function handleAddProject() {
-    setProjects([...projects, `Novo projeto ${Date.now()}`]);
+  async function handleAddProject() {
+    api.post('/projects', {
+      title: `Novo projeto ${Date.now()}`,
+      owner: 'Daniel Cunha',
+    });
   }
 
   return (
