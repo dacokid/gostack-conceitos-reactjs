@@ -18,13 +18,17 @@ function App() {
     api.get('/projects').then((response) => {
       setProjects(response.data);
     });
-  }, [projects]);
+  }, []);
 
   async function handleAddProject() {
-    api.post('/projects', {
+    const response = await api.post('/projects', {
       title: `Novo projeto ${Date.now()}`,
       owner: 'Daniel Cunha',
     });
+
+    const project = response.data;
+
+    setProjects([...projects, project]);
   }
 
   return (
